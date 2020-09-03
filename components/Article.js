@@ -86,6 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Robert is Great',
+    date: 'july 15 1990',
+    firstParagraph: `Robert is Great!! Robert is Great!!Robert is Great!!Robert is Great!!Robert is Great!!Robert is Great!!Robert is Great!!Robert is Great!!Robert is Great!! `,
+
+    secondParagraph: `Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!!  Robert is Awesome!! `,
+
+    thirdParagraph: ` Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!!  Robert is the greatest!!! `
   }
 ];
 
@@ -116,8 +125,55 @@ const data = [
 */
 
 function articleMaker(articleObject){
+
+  //creating all the necessary elements
   let mainDiv = document.createElement('div')
   let bodyTag = document.createElement('body')
-  let newH2 = document.createElement('h2')
-  let
+  let articleTitleH2 = document.createElement('h2')
+  let pDate = document.createElement('p')
+  let p1 = document.createElement('p')
+  let p2 = document.createElement('p')
+  let p3 = document.createElement('p')
+  let newSpan = document.createElement('span')
+
+  //adding a class name to the elements that need one
+  mainDiv.classList.add('article');
+  pDate.classList.add('date');
+  newSpan.classList.add('expandButton')
+
+  //adding content to elements
+  articleTitleH2.textContent = articleObject.title
+  pDate.textContent = articleObject.date
+  p1.textContent = articleObject.firstParagraph
+  p2.textContent = articleObject.secondParagraph
+  p3.textContent = articleObject.thirdParagraph
+  newSpan.textContent = "+"
+
+  //appending all the elements to their parent then returning the mainDiv element
+  bodyTag.appendChild(mainDiv)
+  mainDiv.appendChild(articleTitleH2)
+  mainDiv.appendChild(pDate)
+  mainDiv.appendChild(p1)
+  mainDiv.appendChild(p2)
+  mainDiv.appendChild(p3)
+  mainDiv.appendChild(newSpan)
+
+  newSpan.addEventListener('click', event => {
+    mainDiv.classList.toggle('article-open')
+  })
+
+  return mainDiv;
 }
+
+const artivleDiv= document.querySelector('.articles')//selecting the articles class in order to append all the articles to it
+
+//making an article for each data object that is passed through the dataObj and appending that to the artivleDiv
+data.forEach(dataObj => {
+  const theData = articleMaker(dataObj)
+  artivleDiv.appendChild(theData)
+})
+
+
+// articleMaker(data[0])
+// articleMaker(data[1])
+// articleMaker(data[2])
